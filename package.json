@@ -1,0 +1,19 @@
+{
+  "name": "playwright-again",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:chrome": "npx playwright test tests/example.spec.js --project=chromium",
+    "test:headed": "npx playwright test tests/example.spec.js --project=chromium --headed",
+    "login": "npx playwright test tests/login.spec.js --project=chromium --headed"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.47.2",
+    "@types/node": "^22.7.4",
+    "allure-commandline": "^2.30.0"
+  }
+}
