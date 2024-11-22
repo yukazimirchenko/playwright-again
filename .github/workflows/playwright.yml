@@ -5,6 +5,10 @@ on:
   pull_request:
     branches: [ main, master ]
 jobs:
+  # env:
+  #   GO_REST_HOST: ${{secrets.GO_REST_HOST}}
+  #   TOKEN: ${{secrets.TOKEN}}
+
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
