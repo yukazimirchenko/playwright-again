@@ -1,18 +1,16 @@
 import { faker } from '@faker-js/faker';
 import { test, expect } from '@playwright/test';
 import { apiGeneral } from '../../testData/endpoints';
+import { get } from '../helpers/apiMethods';
 
 test.describe('Go rest', () => {
 
-    let userId = '';
+    const url = '/public/v2/users/'; 
     const { name, gender, email, status } = apiGeneral.userData;
+    let userId = '';
 
-    test('should get users list', async ({ request }) => {
-        const response = await request.get(process.env.GO_REST_HOST + '/public/v2/users/', {
-            headers: apiGeneral.goRestHeaders,
-            params: {}
-        });
-        const data = await response.json();
+    test.only('should get users list', async ({ request }) => {
+        const response = await get(request, url, apiGeneral.goRestHeaders);
         expect(response.status()).toEqual(200);
         expect(response.statusText()).toEqual('OK');
     });
