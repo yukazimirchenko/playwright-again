@@ -4,19 +4,20 @@ import { get } from '../helpers/apiMethods';
 
 test.describe.serial('Go rest', () => {
 
-    const url = '/public/v2/users/'; 
+    const url = '/public/v2/users/';
     const { name, gender, email, status } = apiGeneral.userData;
     let userId = '';
 
     test('should get users list', async ({ request }) => {
-        const response = await get(request,'https://gorest.co.in/' + url);
+        const response = await get(request, process.env.GO_REST_HOST + url);
         expect(response.status()).toEqual(200);
         expect(response.statusText()).toEqual('OK');
     });
 
     test('should successfully create a new user', async ({ request }) => {
-        const response = await request.post('https://gorest.co.in/' + '/public/v2/users/', {
-            data: { name, gender, email, status },
+        const requestPayload = { name, gender, email, status }
+        const response = await request.post(process.env.GO_REST_HOST + '/public/v2/users/', {
+            data: requestPayload,
             headers: apiGeneral.goRestHeaders
         });
         const data = await response.json();
@@ -31,11 +32,11 @@ test.describe.serial('Go rest', () => {
 
     test('should get created user by id', async ({ request }) => {
 
-        let response = await request.get('https://gorest.co.in/' + `/public/v2/users/${userId}`, {
+        let response = await request.get(process.env.GO_REST_HOST + `/public/v2/users/${userId}`, {
             headers: apiGeneral.goRestHeaders
         })
         expect(response.status()).toEqual(200);
-        
+
         const userById = await response.json();
         expect(userById.name).toEqual(name);
         expect(userById.email).toEqual(email);
