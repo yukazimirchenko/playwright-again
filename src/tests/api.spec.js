@@ -1,6 +1,5 @@
 import { test, expect } from '@playwright/test';
 import { apiGeneral } from '../../testData/endpoints';
-import { get } from '../helpers/apiMethods';
 
 test.describe.serial('Go rest', () => {
 
@@ -9,14 +8,14 @@ test.describe.serial('Go rest', () => {
     let userId = '';
 
     test('should get users list', async ({ request }) => {
-        const response = await get(request, process.env.GO_REST_HOST + url);
+        const response = await request.get(process.env.GO_REST_HOST + url);
         expect(response.status()).toEqual(200);
         expect(response.statusText()).toEqual('OK');
     });
 
     test('should successfully create a new user', async ({ request }) => {
         const requestPayload = { name, gender, email, status }
-        const response = await request.post(process.env.GO_REST_HOST + '/public/v2/users/', {
+        const response = await request.post(process.env.GO_REST_HOST + url, {
             data: requestPayload,
             headers: apiGeneral.goRestHeaders
         });
