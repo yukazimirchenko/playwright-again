@@ -9,7 +9,7 @@ test.describe.serial('Go rest', () => {
     let userId = '';
 
     test('should get users list', async ({ request }) => {
-        const response = await get(request, url);
+        const response = await get(request,'https://gorest.co.in/' + url);
         expect(response.status()).toEqual(200);
         expect(response.statusText()).toEqual('OK');
     });
