@@ -7,13 +7,12 @@ on:
         required: false
         default: ''
 jobs:
-  # env:
-  #   HOST: ${{ secrets.GO_REST_HOST }}
-  #   TOKEN: ${{ secrets.TOKEN }}
-
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    env:
+      HOST: ${{ secrets.GO_REST_HOST }}
+      TOKEN: ${{ secrets.TOKEN }}
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
