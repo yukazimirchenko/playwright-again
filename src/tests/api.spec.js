@@ -1,22 +1,21 @@
-import { faker } from '@faker-js/faker';
 import { test, expect } from '@playwright/test';
 import { apiGeneral } from '../../testData/endpoints';
 import { get } from '../helpers/apiMethods';
 
-test.describe('Go rest', () => {
+test.describe.serial('Go rest', () => {
 
     const url = '/public/v2/users/'; 
     const { name, gender, email, status } = apiGeneral.userData;
     let userId = '';
 
-    test.only('should get users list', async ({ request }) => {
-        const response = await get(request, url, apiGeneral.goRestHeaders);
+    test('should get users list', async ({ request }) => {
+        const response = await get(request, url);
         expect(response.status()).toEqual(200);
         expect(response.statusText()).toEqual('OK');
     });
 
     test('should successfully create a new user', async ({ request }) => {
-        const response = await request.post(process.env.GO_REST_HOST + '/public/v2/users/', {
+        const response = await request.post('https://gorest.co.in/' + '/public/v2/users/', {
             data: { name, gender, email, status },
             headers: apiGeneral.goRestHeaders
         });
@@ -32,7 +31,7 @@ test.describe('Go rest', () => {
 
     test('should get created user by id', async ({ request }) => {
 
-        let response = await request.get(process.env.GO_REST_HOST + `/public/v2/users/${userId}`, {
+        let response = await request.get('https://gorest.co.in/' + `/public/v2/users/${userId}`, {
             headers: apiGeneral.goRestHeaders
         })
         expect(response.status()).toEqual(200);

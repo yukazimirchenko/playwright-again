@@ -16,7 +16,7 @@ require('dotenv').config();
 module.exports = defineConfig({
   testDir: './src/tests',
   /* Run tests in files in parallel */
-  fullyParallel: false,
+  fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
@@ -25,10 +25,11 @@ module.exports = defineConfig({
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
-    //['html', { open: 'on-failure' }],
-    //['json'],
-    ['list'],
-    ['allure-playwright'],
+    // ['html', { open: 'on-failure' }],
+    // ['json',  { outputFile: 'results.json' }],
+     ['list'],
+    // ['line'],
+    // ['allure-playwright'],
     ['monocart-reporter', { open: 'never' }]
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */

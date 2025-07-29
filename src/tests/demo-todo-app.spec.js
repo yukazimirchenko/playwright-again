@@ -1,6 +1,5 @@
-// @ts-check
 const { test, expect } = require('@playwright/test');
-import demoLocators, { xxx } from '../locators/demo-todo';
+const demoLocators = require('../locators/demo-todo');
 
 test.beforeEach(async ({ page }) => {
   await page.goto('https://demo.playwright.dev/todomvc');
@@ -26,7 +25,6 @@ test.describe('New Todo', () => {
     await expect(page.getByTestId(demoLocators.todoTitle)).toHaveText([
       TODO_ITEMS[0]
     ]);
-    // await xxx.click(); 
 
     // Create 2nd todo.
     await newTodo.fill(TODO_ITEMS[1]);

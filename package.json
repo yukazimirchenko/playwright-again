@@ -8,18 +8,26 @@
     "test:headed": "npx playwright test tests/example.spec.js --project=chromium --headed",
     "login": "npx playwright test tests/login.spec.js --project=chromium --headed",
     "api": "npx playwright test api.spec.js",
-    "allure": "allure generate allure-results --clean && allure open"
+    "allure": "allure generate allure-results --clean && allure open",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@eslint/js": "^9.32.0",
     "@faker-js/faker": "^7.3.0",
     "@playwright/test": "^1.47.2",
     "@types/node": "^22.7.4",
     "allure-commandline": "^2.30.0",
     "allure-playwright": "^3.0.6",
-    "monocart-reporter": "^2.9.10"
+    "eslint": "^9.32.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.3",
+    "globals": "^16.3.0",
+    "monocart-reporter": "^2.9.10",
+    "prettier": "^3.6.2"
   },
   "dependencies": {
     "dotenv": "^16.4.5"
