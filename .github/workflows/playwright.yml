@@ -1,9 +1,11 @@
 name: Playwright Tests
 on:
-  push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
+  workflow_dispatch:
+    inputs:
+      test_type:
+        description: 'Type of tests to run'
+        required: false
+        default: ''
 jobs:
   # env:
   #   HOST: ${{ secrets.GO_REST_HOST }}
@@ -24,7 +26,26 @@ jobs:
       run: npx playwright install --with-deps
 
     - name: Run Playwright tests
-      run: npm run api
+      run: |
+        if [ "${{ inputs.browsers }}" = "all" ]; then
+          BROWSERS="--project=chromium --project=firefox --project=webkit"
+        else
+          BROWSERS="--project=${{ inputs.browsers }}"
+        fi
+
+        if [ "${{ inputs.test_type }}" = "all" ]; then
+          TEST_COMMANDS=("npm run api" "npm run e2e")
+        else
+          TEST_COMMANDS=("npm run ${{ inputs.test_type }}")
+        fi
+
+        for cmd in "${TEST_COMMANDS[@]}"; do
+          if [ -n "${{ inputs.test_grep }}" ]; then
+            $cmd -- $BROWSERS --grep "${{ inputs.test_grep }}"
+          else
+            $cmd -- $BROWSERS
+          fi
+        done
 
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
