@@ -15,7 +15,7 @@ test.describe.serial('Go rest', () => {
 
     test('should successfully create a new user', async ({ request }) => {
         const requestPayload = { name, gender, email, status }
-        const response = await request.post(process.env.GO_REST_HOST + url, {
+        const response = await request.post(secrets.GO_REST_HOST + url, {
             data: requestPayload,
             headers: apiGeneral.goRestHeaders
         });
@@ -31,7 +31,7 @@ test.describe.serial('Go rest', () => {
 
     test('should get created user by id', async ({ request }) => {
 
-        let response = await request.get(process.env.GO_REST_HOST + `/public/v2/users/${userId}`, {
+        let response = await request.get(secrets.GO_REST_HOST + `/public/v2/users/${userId}`, {
             headers: apiGeneral.goRestHeaders
         })
         expect(response.status()).toEqual(200);
