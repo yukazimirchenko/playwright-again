@@ -8,7 +8,7 @@ test.describe.serial('Go rest', () => {
     let userId = '';
 
     test('should get users list', async ({ request }) => {
-        const response = await request.get(process.env.GO_REST_HOST + url);
+        const response = await request.get(secrets.env.GO_REST_HOST + url);
         expect(response.status()).toEqual(200);
         expect(response.statusText()).toEqual('OK');
     });
@@ -41,16 +41,4 @@ test.describe.serial('Go rest', () => {
         expect(userById.email).toEqual(email);
         expect(userById.gender).toEqual(gender);
     });
-
-    // get user by id 
-
-    // update 
-
-    // get user by id 
-
-    // delete 
-
-    // get user by id - 404 
-
-    // faker 
 })
