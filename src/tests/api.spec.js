@@ -8,7 +8,7 @@ test.describe.serial('Go rest', () => {
     let userId = '';
 
     test('should get users list', async ({ request }) => {
-        const response = await request.get(secrets.env.GO_REST_HOST + url);
+        const response = await request.get(secrets.GO_REST_HOST + url);
         expect(response.status()).toEqual(200);
         expect(response.statusText()).toEqual('OK');
     });
